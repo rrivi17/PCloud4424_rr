@@ -8,6 +8,7 @@ db = {}
 #endpoint: annotazione e funzione sottostante
 @app.route('/graph',methods=["GET"])
 def graph():
+    print("ciao")
     #funzione che ridirige verso altra pagina che è un file che sitrova nella cartella static
     return redirect(url_for('static', filename='graph.html'))
 
