@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Mappa spostamenti</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo"><strong>Applicazione Pervasive Cloud</strong></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="landing.html">Landing</a></li>
+							<li><a href="generic.html">Generic</a></li>
+							<li><a href="elements.html">Elements</a></li>
+						</ul>
+						<ul class="actions stacked">
+							<li><a href="#" class="button primary fit">Get Started</a></li>
+							<li><a href="#" class="button fit">Log In</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main" class="alt">
+
+						<!-- One -->
+							<section id="one">
+								<div class="inner">
+									<header class="major">
+										<h1>Grafico</h1>
+									</header>
+									<div id="mapid" style="width: 600px; height: 400px;"></div>
+									
+								</div>
+							</section>
+
+					</div>
+					
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+							</ul>
+							
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			
+			<!--import css e libreria-->
+			<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
+			<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+			<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<!--richiesta http verso server per ricevere info(get) con libreria js e visualizzare il grafico
+		una volta ricevuti i dati viene chiamata function: datav è risposta della chiamata http(che è di tipo json)
+		stringa json deserializzata: dalla stringa si riottiene la struttura dati(json.parse)
+		google.charts.setOnLoadCallback(drawBasic);: quando caricata pagina chiamato drawbasic
+		document.getElementById('mapid'): accedo a div dove voglio metter eil grafico-->
+			<script type="text/javascript">
+
+				$.get("http://localhost/sensors/s1",function(datav, status){
+					//console.log(datav)
+					datav = JSON.parse(datav)
+					console.log(datav)
+
+
+					google.charts.load('current', {packages: ['corechart', 'line']});
+					google.charts.setOnLoadCallback(drawBasic);
+
+					function drawBasic() {
+
+						  var data = new google.visualization.DataTable();
+						  data.addColumn('number', 'Time');
+						  data.addColumn('number', 'PM10');
+
+						  data.addRows(datav);
+
+						  var options = {
+							hAxis: {
+							  title: 'Time'
+							},
+							vAxis: {
+							  title: 'PM10'
+							}
+						  };
+
+						  var chart = new google.visualization.LineChart(document.getElementById('mapid'));
+
+						  chart.draw(data, options);
+   					}
+
+
+				})
+
+			</script>
+			
+
+	</body>
+</html>
