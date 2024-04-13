@@ -3,7 +3,8 @@ import time
 #request usato da codice di sensore
 
 #base_url = 'http://localhost:80'
-base_url="http://34.154.27.7:80"
+#base_url="http://34.154.27.7:80"
+base_url="https://pcloudrr-2.ew.r.appspot.com"
 
 sensor = 's1'
 #client che simula sensore leggendo dati e inviandoli al server
