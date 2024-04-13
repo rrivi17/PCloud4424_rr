@@ -2,7 +2,9 @@ from requests import get, post
 import time
 #request usato da codice di sensore
 
-base_url = 'http://localhost:80'
+#base_url = 'http://localhost:80'
+base_url="http://34.154.27.7:80"
+
 sensor = 's1'
 #client che simula sensore leggendo dati e inviandoli al server
 with open('CleanData_PM10.csv') as f:
