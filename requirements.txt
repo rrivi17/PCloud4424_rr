@@ -2,3 +2,5 @@ flask
 requests
 joblib
 scikit-learn==1.1.2
+flask-login
+google-cloud-firestore

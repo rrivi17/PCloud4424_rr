@@ -45,12 +45,12 @@
 										<h1>Grafico</h1>
 									</header>
 									<div id="mapid" style="width: 600px; height: 400px;"></div>
-									
+
 								</div>
 							</section>
 
 					</div>
-					
+
 
 				<!-- Footer -->
 					<footer id="footer">
@@ -62,7 +62,7 @@
 								<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
 								<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
 							</ul>
-							
+
 						</div>
 					</footer>
 
@@ -76,7 +76,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-			
+
 			<!--import css e libreria-->
 			<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
 			<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
@@ -102,8 +102,17 @@
 						  var data = new google.visualization.DataTable();
 						  data.addColumn('number', 'Time');
 						  data.addColumn('number', 'PM10');
+						  data.addColumn('number', 'Forecast');
+						  datav2 = []
+						  for(i=0; i<datav.length;i++)
+						  	if (i < datav.length - 10)
+						  		datav2.push([datav[i][0],datav[i][1],null])
+						  	else
+						  		datav2.push([datav[i][0],null,datav[i][1]])
 
-						  data.addRows(datav);
+						  data.addRows(datav2);
+
+
 
 						  var options = {
 							hAxis: {
@@ -123,7 +132,7 @@
 				})
 
 			</script>
-			
+
 
 	</body>
 </html>
